@@ -107,6 +107,11 @@ namespace Chess.Core.Classes
             return _file;
         }
 
+        public int GetFileNr()
+        {
+            return _fileNr;
+        }
+
         public int GetRank()
         {
             return _rank;

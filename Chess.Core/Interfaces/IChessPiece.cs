@@ -14,5 +14,6 @@ namespace Chess.Core.Interfaces
 
         int GetRank();
         string GetFile();
+        int GetFileNr();
     }
 }
