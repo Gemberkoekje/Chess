@@ -16,5 +16,11 @@ namespace Chess.Core.Factories
             var retval = new Game(gameSetup);
             return retval;
         }
+        public static IGame NewCustomGame(string board)
+        {
+            var gameSetup = new CustomGameSetup(board);
+            var retval = new Game(gameSetup);
+            return retval;
+        }
     }
 }

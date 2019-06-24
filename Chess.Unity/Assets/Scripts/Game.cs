@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    public GameObject BlackSquareTemplate;
+    public GameObject WhiteSquareTemplate;
+
     public GameObject BishopWhiteTemplate;
     public GameObject BishopBlackTemplate;
     public GameObject KingWhiteTemplate;
@@ -22,6 +25,22 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int y = 0; y < 8; y++)
+        {
+            for(int x = 0; x < 8; x++)
+            {
+                bool black = x % 2 == 0;
+                if (y % 2 == 0) black = !black;
+                GameObject monoSquare = null;
+                if (black)
+                    monoSquare = GameObject.Instantiate(BlackSquareTemplate);
+                else
+                    monoSquare = GameObject.Instantiate(WhiteSquareTemplate);
+
+                monoSquare.transform.position = new Vector3(-8.9f + ((x) * ((8.84f + 8.88f) / 7)), 0.68f, -8.9f + ((y) * ((8.84f + 8.88f) / 7)));
+                monoSquare.SetActive(true);
+            }
+        }
         var game = GameFactory.NewGame();
         var board = game.GetBoard();
         foreach(var piece in board)
@@ -68,7 +87,7 @@ public class Game : MonoBehaviour
                         monoPiece = GameObject.Instantiate(RookBlackTemplate);
                     break;
             }
-            monoPiece.transform.position = new Vector3(-8.9f + ((piece.GetFileNr()-1)*((8.84f + 8.88f)/8)), 1.2f, -8.9f + ((piece.GetRank()-1) * ((8.84f + 8.88f)/8)));
+            monoPiece.transform.position = new Vector3(-8.9f + ((piece.GetFileNr()-1)*((8.84f + 8.88f)/7)), 1.2f, -8.9f + ((piece.GetRank()-1) * ((8.84f + 8.88f)/7)));
             monoPiece.SetActive(true);
             
         }

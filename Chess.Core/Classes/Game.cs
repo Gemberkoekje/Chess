@@ -14,7 +14,19 @@ namespace Chess.Core.Classes
         internal Game(IGameSetup gameSetup)
         {
             _board = gameSetup.GetSetup();
-            
+            CheckDuplications(_board);
+        }
+
+        private void CheckDuplications(List<IChessPiece> board)
+        {
+            List<string> uniqueLocations = new List<string>();
+            foreach (var piece in board)
+            {
+                var rankandfile = string.Format("{0}{1}", piece.GetFile(), piece.GetRank());
+                if (uniqueLocations.Exists(l => l == rankandfile))
+                    throw new Exception(string.Format("You cannot place more than one piece on a square at any time. Duplicate on {0}",rankandfile));
+                uniqueLocations.Add(rankandfile);
+            }
         }
 
         public List<IChessPiece> GetBoard()

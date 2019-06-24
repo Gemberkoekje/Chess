@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ChessPiece.cs" />
+    <Compile Include="Classes\CustomGameSetup.cs" />
     <Compile Include="Classes\DefaultGameSetup.cs" />
     <Compile Include="Classes\Game.cs" />
     <Compile Include="Enums\PieceColor.cs" />

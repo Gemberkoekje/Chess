@@ -6,3 +6,5 @@ As a player I want the chessboard to be set up properly, so that I can start the
   - Queen central square of same color
   - King on vacant spot next to queen
   - Pawns one square in front of all other pieces
+  
+As a developer I want to set up custom boards, so that I can check moves more easily.
