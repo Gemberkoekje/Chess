@@ -10,10 +10,10 @@ namespace Chess.Core.Classes
 {
     class CustomGameSetup : IGameSetup
     {
-        private List<IChessPiece> _savedGameSetup;
+        private List<ChessPiece> _savedGameSetup;
         internal CustomGameSetup(string desiredSetup)
         {
-            _savedGameSetup = new List<IChessPiece>();
+            _savedGameSetup = new List<ChessPiece>();
             var piecelist = Split(desiredSetup, 4);
             foreach (var piece in piecelist)
             {
@@ -34,7 +34,16 @@ namespace Chess.Core.Classes
                     pieceSymbol == " " ? PieceSymbol.Pawn :
                     throw new ArgumentException(string.Format("symbol {0} isn't K, B, Q, N, R or  ", pieceSymbol));
 
-                if(
+                var resolver = pieceSymbol == "K" ? (IMoveResolver)new KingMoveResolver() :
+                    pieceSymbol == "B" ? (IMoveResolver)new BishopMoveResolver() :
+                    pieceSymbol == "Q" ? (IMoveResolver)new QueenMoveResolver() :
+                    pieceSymbol == "N" ? (IMoveResolver)new KnightMoveResolver() :
+                    pieceSymbol == "R" ? (IMoveResolver)new RookMoveResolver() :
+                    pieceSymbol == " " ? (IMoveResolver)new PawnMoveResolver() :
+                    throw new ArgumentException(string.Format("symbol {0} isn't K, B, Q, N, R or  ", pieceSymbol));
+
+
+                if (
                     piecefile != "a" &&
                     piecefile != "b" &&
                     piecefile != "c" &&
@@ -52,10 +61,10 @@ namespace Chess.Core.Classes
 
                 if(rank < 1 || rank > 8)
                     throw new ArgumentException(string.Format("rank {0} isn't a number between 1 and 8", piecerank));
-                _savedGameSetup.Add(new ChessPiece(color, symbol, String.Format("{0}{1}",piecefile,rank)));
+                _savedGameSetup.Add(new ChessPiece(color, symbol, String.Format("{0}{1}", piecefile, rank), resolver));
             }
         }
-        public List<IChessPiece> GetSetup()
+        public List<ChessPiece> GetSetup()
         {
             return _savedGameSetup;
         }

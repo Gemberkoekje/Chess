@@ -44,12 +44,20 @@
     <Compile Include="Classes\CustomGameSetup.cs" />
     <Compile Include="Classes\DefaultGameSetup.cs" />
     <Compile Include="Classes\Game.cs" />
+    <Compile Include="Classes\BishopMoveResolver.cs" />
+    <Compile Include="Classes\QueenMoveResolver.cs" />
+    <Compile Include="Classes\KnightMoveResolver.cs" />
+    <Compile Include="Classes\PawnMoveResolver.cs" />
+    <Compile Include="Classes\RookMoveResolver.cs" />
+    <Compile Include="Classes\KingMoveResolver.cs" />
+    <Compile Include="Classes\PossibleMove.cs" />
     <Compile Include="Enums\PieceColor.cs" />
     <Compile Include="Enums\PieceSymbol.cs" />
     <Compile Include="Factories\GameFactory.cs" />
     <Compile Include="Interfaces\IChessPiece.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IGameSetup.cs" />
+    <Compile Include="Interfaces\IMoveResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

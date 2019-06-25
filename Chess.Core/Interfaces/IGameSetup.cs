@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chess.Core.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Chess.Core.Interfaces
 {
     interface IGameSetup
     {
-        List<IChessPiece> GetSetup();
+        List<ChessPiece> GetSetup();
     }
 }

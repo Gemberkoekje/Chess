@@ -10,6 +10,7 @@ namespace Chess.Core.Classes
 {
     internal class ChessPiece : IChessPiece
     {
+        private IMoveResolver _moveResolver;
         private PieceColor _color;
         private PieceSymbol _symbol;
         private int _rank;
@@ -73,11 +74,17 @@ namespace Chess.Core.Classes
             }
         }
 
-        internal ChessPiece(PieceColor color, PieceSymbol symbol, string rankandfile)
+        internal ChessPiece(PieceColor color, PieceSymbol symbol, string rankandfile, IMoveResolver moveResolver)
         {
             _color = color;
             _symbol = symbol;
+            _moveResolver = moveResolver;
 
+            SetRankAndFile(rankandfile);
+        }
+
+        private void SetRankAndFile(string rankandfile)
+        {
             if (rankandfile == null)
                 throw new ArgumentNullException("rankandfile cannot be empty.");
             if (rankandfile.Length != 2)
@@ -92,6 +99,14 @@ namespace Chess.Core.Classes
             _file = file;
         }
 
+        internal List<string> GetPossibleMoves(List<ChessPiece> board)
+        {
+            return _moveResolver.GetPossibleMoves(this, board);
+        }
+        internal void Move(string destination)
+        {
+            SetRankAndFile(destination);
+        }
         public PieceColor GetColor()
         {
             return _color;
@@ -117,6 +132,10 @@ namespace Chess.Core.Classes
             return _rank;
         }
 
+        public string GetRankAndFile()
+        {
+            return string.Format("{0}{1}",_file,_rank);
+        }
 
     }
 }

@@ -8,3 +8,19 @@ As a player I want the chessboard to be set up properly, so that I can start the
   - Pawns one square in front of all other pieces
   
 As a developer I want to set up custom boards, so that I can check moves more easily.
+
+As a player I want to be able to move the king exactly one square horizontally, vertically or diagonally, so that I can play the game.
+As a player I want to be able to move the rook horizontally or vertically, through any number of unoccupied squares, so that I can play the game.
+As a player I want to be able to move the bishop any number of vacant squares in any diagonal direction, so that I can play the game.
+As a player I want to be able to move the queen any number of vacant squares in a horizontal, vertical or diagonal direction, so that I can play the game.
+As a player I should not be able to move the rook, bishop or queen over other pieces (they cannot jump), so that I cannot cheat at the game.
+As a player I want to be able to move the knight to the nearest square not on the same rank, file or diagonal, so that I can play the game.
+As a player I should be able to jump the knight over other pieces, so that the game follows the rules.
+As a player I want to be able to move the pawn straight forward one square, if that square is vacant.
+As a player I want to be able to move the pawn straight forward two squares if the pawn has not yet made its first move, provided both squares are vacant.
+As a player I want to be able to move the pawn diagonally forward, if there is a piece to capture on that square.
+
+As a player I should not be able to do a move which results in 2 pieces on the same square.
+As a player I should be able to capture opposing pieces by landing on their square.
+As a player I should not be able to move a piece outside of the play area.
+

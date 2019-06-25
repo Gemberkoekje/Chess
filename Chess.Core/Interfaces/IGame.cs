@@ -10,5 +10,6 @@ namespace Chess.Core.Interfaces
     {
         List<IChessPiece> GetBoard();
 
+        IGame Move(string source, string destination);
     }
 }

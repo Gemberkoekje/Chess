@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Moves\KingMoves.cs" />
     <Compile Include="NewCustomGame\CustomGameTest.cs" />
     <Compile Include="NewDefaultGame\NewGameKingTest.cs" />
     <Compile Include="NewDefaultGame\NewGameQueenTest.cs" />
