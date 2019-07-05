@@ -24,5 +24,110 @@ namespace Chess.Core.Test.Moves
             Assert.IsNotNull(king);
 
         }
+        [TestMethod]
+        public void KingCanMoveOneSquareBackward()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "c5");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "c");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareLeft()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "b6");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "b");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareRight()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "d6");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "d");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareForwardAndLeft()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "b7");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "b");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareForwardAndRight()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "d7");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "d");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareBackwardAndLeft()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "b5");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "b");
+            Assert.IsNotNull(king);
+
+        }
+        [TestMethod]
+        public void KingCanMoveOneSquareBackwardAndRight()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "d5");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
+            Assert.IsNotNull(king);
+
+        }
     }
 }
