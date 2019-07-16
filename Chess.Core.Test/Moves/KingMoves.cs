@@ -129,5 +129,88 @@ namespace Chess.Core.Test.Moves
             Assert.IsNotNull(king);
 
         }
+        [TestMethod]
+        public void KingCannotMoveTwoSquaresHorizontally()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "e6");
+            }catch(Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+
+        }
+        [TestMethod]
+        public void KingCannotMoveTwoSquaresVertically()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "c4");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+
+        }
+        [TestMethod]
+        public void KingCannotMoveTwoSquaresDiagonally()
+        {
+            //Arrange
+            string testString = "WKc6";
+            var game = GameFactory.NewCustomGame(testString);
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "e4");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+
+        }
+        [TestMethod]
+        public void KingCannotMoveThroughAllies()
+        {
+            //Arrange
+            string testString = "WKc6WQc5";
+            var game = GameFactory.NewCustomGame(testString);
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "c5");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+
+        }
     }
 }
