@@ -212,5 +212,20 @@ namespace Chess.Core.Test.Moves
             Assert.Fail("No exception thrown");
 
         }
+        [TestMethod]
+        public void KingCanCaptureEnemies()
+        {
+            //Arrange
+            string testString = "WKc6BRd5";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("c6", "d5");
+
+            //Assert
+            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
+            Assert.IsNotNull(king);
+
+        }
     }
 }
