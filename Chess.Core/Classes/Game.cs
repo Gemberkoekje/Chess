@@ -65,7 +65,7 @@ namespace Chess.Core.Classes
         {
             var possiblemove = _possibleMoves.FirstOrDefault(m => m.Source == source && m.Destination == destination);
             if (possiblemove == null)
-                throw new ArgumentException("Move is not valid!");
+                throw new ArgumentException(string.Format("Move ({0} to {1}) is not valid!",source,destination));
         }
 
         private void ExecuteMove(string source, string destination)
