@@ -95,5 +95,75 @@ namespace Chess.Core.Test.Moves
                 }
             }
         }
+        [TestMethod]
+        public void BishopCanCaptureAnotherPlayersPiece()
+        {
+            var game = GameFactory.NewCustomGame("WBc6B b7");
+
+            //Act
+            var updatedgame = game.Move("c6", "b7");
+
+            //Assert
+            var count = game.GetBoard().Count;
+            Assert.AreEqual(1, count);
+            var bishop = game.GetBoard().Single(p =>
+                p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Bishop && p.GetRank() == 7 &&
+                p.GetFile() == "b");
+            Assert.IsNotNull(bishop);
+        }
+        [TestMethod]
+        public void BishopCannotMoveThroughAnotherPlayersPiece()
+        {
+            var game = GameFactory.NewCustomGame("WBc6B b7");
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "a8");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+        }
+        [TestMethod]
+        public void BishopCannotMoveIntoSamePlayersPiece()
+        {
+            var game = GameFactory.NewCustomGame("WBc6W b7");
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "b7");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+        }
+        [TestMethod]
+        public void BishopCannotMoveThroughSamePlayersPiece()
+        {
+            var game = GameFactory.NewCustomGame("WBc6W b7");
+
+            try
+            {
+                //Act
+                var updatedgame = game.Move("c6", "a8");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+        }
     }
 }
