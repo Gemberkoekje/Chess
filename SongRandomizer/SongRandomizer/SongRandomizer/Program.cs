@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SongRandomizer
 {
@@ -9,30 +10,33 @@ namespace SongRandomizer
         static void Main(string[] args)
         {
             var random = new Random((int)DateTime.Now.Ticks);
-            var folderPath = "E:\\";
+            var folderPath =  "E:\\";
             var folderPath2 = "C:\\Music\\";
-            List<string> fileList = new List<string>();
-            foreach (string file in Directory.EnumerateFiles(folderPath, "*.*"))
+            foreach (string file2 in Directory.EnumerateFiles(folderPath, "*.*"))
             {
-                var justFile = file.Substring(3);
+                var justFile = file2.Substring(3);
                 Console.WriteLine(justFile);
                 var newName = justFile;
                 while (char.IsDigit(newName[0]))
                 {
                     newName = newName.Substring(1);
                 }
-                File.Move(file, string.Format("{0}{1}", folderPath2, newName));
-                fileList.Add(newName);
+                try
+                {
+                    File.Move(file2, string.Format("{0}{1}", folderPath2, newName));
+                }
+                catch (Exception e)
+                {
+
+                }
             }
-            DirectoryInfo di = new DirectoryInfo(folderPath);
-            foreach (FileInfo file in di.EnumerateFiles())
+            int count = 0;
+            var dir = Directory.EnumerateFiles(folderPath2, "*.*");
+            var count2 = dir.Count();
+            var file = dir.ElementAt(random.Next(count2));
+            while (count2 != 0)
             {
-                file.Delete();
-            }
-            int count = 1;
-            while (fileList.Count > 0)
-            {
-                var oldsong = fileList[random.Next(fileList.Count)];
+                var oldsong = file.Substring(9);
                 var newsong = string.Format("{0:0000}{1}", count, oldsong);
                 try
                 {
@@ -46,9 +50,12 @@ namespace SongRandomizer
 
                 }
 
-                count++;
-                fileList.Remove(oldsong);
                 Console.WriteLine(newsong);
+                dir = Directory.EnumerateFiles(folderPath2, "*.*");
+                count2 = dir.Count();
+                count++;
+                if(count2 != 0)
+                    file = dir.ElementAt(random.Next(count2));
             }
             Console.WriteLine("Hello World!");
             Console.ReadLine();

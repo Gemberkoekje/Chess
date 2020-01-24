@@ -20,7 +20,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "c7");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "c");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "c");
             Assert.IsNotNull(king);
 
         }
@@ -35,7 +35,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "c5");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "c");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "c");
             Assert.IsNotNull(king);
 
         }
@@ -50,7 +50,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "b6");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "b");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "b");
             Assert.IsNotNull(king);
 
         }
@@ -65,7 +65,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "d6");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "d");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 6 && p.GetFile() == "d");
             Assert.IsNotNull(king);
 
         }
@@ -80,7 +80,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "b7");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "b");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "b");
             Assert.IsNotNull(king);
 
         }
@@ -95,7 +95,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "d7");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "d");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 7 && p.GetFile() == "d");
             Assert.IsNotNull(king);
 
         }
@@ -110,7 +110,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "b5");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "b");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "b");
             Assert.IsNotNull(king);
 
         }
@@ -125,7 +125,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "d5");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
             Assert.IsNotNull(king);
 
         }
@@ -140,7 +140,7 @@ namespace Chess.Core.Test.Moves
             {
                 //Act
                 var updatedgame = game.Move("c6", "e6");
-            }catch(Exception e)
+            }catch(Exception)
             {
                 return;
             }
@@ -161,7 +161,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "c4");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -182,7 +182,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "e4");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -192,7 +192,7 @@ namespace Chess.Core.Test.Moves
 
         }
         [TestMethod]
-        public void KingCannotMoveThroughAllies()
+        public void KingCannotMoveThroughFriendlyUnits()
         {
             //Arrange
             string testString = "WKc6WQc5";
@@ -203,7 +203,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "c5");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -213,7 +213,7 @@ namespace Chess.Core.Test.Moves
 
         }
         [TestMethod]
-        public void KingCanCaptureEnemies()
+        public void KingCanCaptureRivalUnits()
         {
             //Arrange
             string testString = "WKc6BRd5";
@@ -223,7 +223,7 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "d5");
 
             //Assert
-            var king = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
+            var king = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.King && p.GetRank() == 5 && p.GetFile() == "d");
             Assert.IsNotNull(king);
 
         }

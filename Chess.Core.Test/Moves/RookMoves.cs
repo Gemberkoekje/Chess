@@ -27,7 +27,7 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("b5", string.Format("b{0}",x));
 
                 //Assert
-                var rook = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == x && p.GetFile() == "b");
+                var rook = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == x && p.GetFile() == "b");
                 Assert.IsNotNull(rook);
             }
         }
@@ -49,7 +49,7 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("d5", string.Format("{0}5", t));
 
                 //Assert
-                var rook = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == 5 && p.GetFile() == string.Format("{0}", t));
+                var rook = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == 5 && p.GetFile() == string.Format("{0}", t));
                 Assert.IsNotNull(rook);
             }
         }
@@ -66,7 +66,7 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("d5", "f3");
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -76,7 +76,7 @@ namespace Chess.Core.Test.Moves
 
         }
         [TestMethod]
-        public void RookCannotMoveThroughAllies()
+        public void RookCannotMoveThroughFriendlyUnits()
         {
             //Arrange
             string testString = "WRd5WQd7";
@@ -88,7 +88,7 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("d5", "d8");
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -98,7 +98,7 @@ namespace Chess.Core.Test.Moves
 
         }
         [TestMethod]
-        public void RookCannotMoveThroughEnemies()
+        public void RookCannotMoveThroughRivalUnits()
         {
             //Arrange
             string testString = "WRd5BQd3";
@@ -110,7 +110,7 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("d5", "d2");
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -120,7 +120,7 @@ namespace Chess.Core.Test.Moves
 
         }
         [TestMethod]
-        public void RookCanCaptureEnemies()
+        public void RookCanCaptureRivalUnits()
         {
             //Arrange
             string testString = "WRd5BQd2";
@@ -131,7 +131,7 @@ namespace Chess.Core.Test.Moves
 
 
             //Assert
-            var rook = game.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == 2 && p.GetFile() == "d");
+            var rook = updatedgame.GetBoard().Single(p => p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Rook && p.GetRank() == 2 && p.GetFile() == "d");
             Assert.IsNotNull(rook);
 
         }

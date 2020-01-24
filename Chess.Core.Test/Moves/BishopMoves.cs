@@ -30,10 +30,10 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("c6", string.Format("{0}{1}",targetfile,targetrank));
 
                 //Assert
-                var king = game.GetBoard().Single(p =>
+                var bishop = updatedgame.GetBoard().Single(p =>
                     p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Bishop && p.GetRank() == targetrank &&
                     p.GetFile() == string.Format("{0}",targetfile));
-                Assert.IsNotNull(king);
+                Assert.IsNotNull(bishop);
             }
         }
         [TestMethod]
@@ -54,10 +54,10 @@ namespace Chess.Core.Test.Moves
                 var updatedgame = game.Move("c6", string.Format("{0}{1}", targetfile, targetrank));
 
                 //Assert
-                var king = game.GetBoard().Single(p =>
+                var bishop = updatedgame.GetBoard().Single(p =>
                     p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Bishop && p.GetRank() == targetrank &&
                     p.GetFile() == string.Format("{0}", targetfile));
-                Assert.IsNotNull(king);
+                Assert.IsNotNull(bishop);
             }
         }
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Chess.Core.Test.Moves
                         //Act
                         var updatedgame = game.Move("c6", target);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         continue;
                     }
@@ -96,7 +96,7 @@ namespace Chess.Core.Test.Moves
             }
         }
         [TestMethod]
-        public void BishopCanCaptureAnotherPlayersPiece()
+        public void BishopCanCaptureRivalUnits()
         {
             var game = GameFactory.NewCustomGame("WBc6B b7");
 
@@ -104,15 +104,15 @@ namespace Chess.Core.Test.Moves
             var updatedgame = game.Move("c6", "b7");
 
             //Assert
-            var count = game.GetBoard().Count;
+            var count = updatedgame.GetBoard().Count;
             Assert.AreEqual(1, count);
-            var bishop = game.GetBoard().Single(p =>
+            var bishop = updatedgame.GetBoard().Single(p =>
                 p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Bishop && p.GetRank() == 7 &&
                 p.GetFile() == "b");
             Assert.IsNotNull(bishop);
         }
         [TestMethod]
-        public void BishopCannotMoveThroughAnotherPlayersPiece()
+        public void BishopCannotMoveThroughRivalUnits()
         {
             var game = GameFactory.NewCustomGame("WBc6B b7");
 
@@ -121,7 +121,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "a8");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -130,7 +130,7 @@ namespace Chess.Core.Test.Moves
             Assert.Fail("No exception thrown");
         }
         [TestMethod]
-        public void BishopCannotMoveIntoSamePlayersPiece()
+        public void BishopCannotMoveIntoFriendlyUnits()
         {
             var game = GameFactory.NewCustomGame("WBc6W b7");
 
@@ -139,7 +139,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "b7");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
@@ -148,7 +148,7 @@ namespace Chess.Core.Test.Moves
             Assert.Fail("No exception thrown");
         }
         [TestMethod]
-        public void BishopCannotMoveThroughSamePlayersPiece()
+        public void BishopCannotMoveThroughFriendlyUnits()
         {
             var game = GameFactory.NewCustomGame("WBc6W b7");
 
@@ -157,7 +157,7 @@ namespace Chess.Core.Test.Moves
                 //Act
                 var updatedgame = game.Move("c6", "a8");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }

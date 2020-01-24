@@ -29,7 +29,7 @@ namespace Chess.Core.Test.Moves
                 var targetfile = move[0];
                 var targetrank = int.Parse(string.Format("{0}",move[1]));
                 //Assert
-                var queen = game.GetBoard().Single(p =>
+                var queen = updatedgame.GetBoard().Single(p =>
                     p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Queen && p.GetRank() == targetrank &&
                     p.GetFile() == string.Format("{0}",targetfile));
                 Assert.IsNotNull(queen);
@@ -60,7 +60,7 @@ namespace Chess.Core.Test.Moves
                         //Act
                         var updatedgame = game.Move("d3", target);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         continue;
                     }
@@ -69,6 +69,61 @@ namespace Chess.Core.Test.Moves
                     Assert.Fail("No exception thrown");
                 }
             }
+        }
+        [TestMethod]
+        public void QueenCanCaptureRivalUnits()
+        {
+            //Arrange
+            string testString = "WQd3BBf5";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("d3", "f5");
+            //Assert
+            var queen = updatedgame.GetBoard().Single(p =>
+                p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Queen && p.GetRank() == 5 &&
+                p.GetFile() == "f");
+            Assert.IsNotNull(queen);
+            var count = updatedgame.GetBoard().Count;
+            Assert.AreEqual(1, count);
+        }
+        [TestMethod]
+        public void QueenCannotMoveThroughFriendlyUnits()
+        {
+            //Arrange
+            string testString = "WQd3WBf5";
+            var game = GameFactory.NewCustomGame(testString);
+            try
+            {
+                //Act
+                var updatedgame = game.Move("d3", "g6");
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
+        }
+        [TestMethod]
+        public void QueenCannotMoveThroughRivalUnits()
+        {
+            //Arrange
+            string testString = "WQd3BBf5";
+            var game = GameFactory.NewCustomGame(testString);
+            try
+            {
+                //Act
+                var updatedgame = game.Move("d3", "g6");
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            //Assert
+            Assert.Fail("No exception thrown");
         }
     }
 }

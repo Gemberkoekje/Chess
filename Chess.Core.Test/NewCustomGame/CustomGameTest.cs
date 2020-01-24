@@ -365,7 +365,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }
@@ -385,7 +385,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }
@@ -405,7 +405,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }
@@ -425,7 +425,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }
@@ -445,7 +445,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }
@@ -465,7 +465,7 @@ namespace Chess.Core.Test.NewCustomGame
             {
                 var game = GameFactory.NewCustomGame(testString);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return;
             }

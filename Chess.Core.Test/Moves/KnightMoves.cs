@@ -29,10 +29,10 @@ namespace Chess.Core.Test.Moves
                 var targetfile = move[0];
                 var targetrank = int.Parse(string.Format("{0}",move[1]));
                 //Assert
-                var queen = game.GetBoard().Single(p =>
+                var knight = game.GetBoard().Single(p =>
                     p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Knight && p.GetRank() == targetrank &&
                     p.GetFile() == string.Format("{0}",targetfile));
-                Assert.IsNotNull(queen);
+                Assert.IsNotNull(knight);
             }
         }
 
@@ -60,7 +60,7 @@ namespace Chess.Core.Test.Moves
                         //Act
                         var updatedgame = game.Move("e6", target);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         continue;
                     }
@@ -69,6 +69,58 @@ namespace Chess.Core.Test.Moves
                     Assert.Fail("No exception thrown");
                 }
             }
+        }
+
+        [TestMethod]
+        public void KnightCanJumpOverFriendlyUnits()
+        {
+
+                //Arrange
+                string testString = "WNe6WBe5WBf5";
+                var game = GameFactory.NewCustomGame(testString);
+
+                //Act
+                var updatedgame = game.Move("e6", "f4");
+                //Assert
+                var knight = updatedgame.GetBoard().Single(p =>
+                    p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Knight && p.GetRank() == 4 &&
+                    p.GetFile() == "f");
+                Assert.IsNotNull(knight);
+        }
+
+        [TestMethod]
+        public void KnightCanJumpOverRivalUnits()
+        {
+
+            //Arrange
+            string testString = "WNe6BBe5BBf5";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("e6", "f4");
+            //Assert
+            var knight = updatedgame.GetBoard().Single(p =>
+                p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Knight && p.GetRank() == 4 &&
+                p.GetFile() == "f");
+            Assert.IsNotNull(knight);
+        }
+        [TestMethod]
+        public void KnightCanCaptureRivalUnits()
+        {
+
+            //Arrange
+            string testString = "WNe6BBf4";
+            var game = GameFactory.NewCustomGame(testString);
+
+            //Act
+            var updatedgame = game.Move("e6", "f4");
+            //Assert
+            var knight = updatedgame.GetBoard().Single(p =>
+                p.GetColor() == PieceColor.White && p.GetSymbol() == PieceSymbol.Knight && p.GetRank() == 4 &&
+                p.GetFile() == "f");
+            Assert.IsNotNull(knight);
+            var count = updatedgame.GetBoard().Count;
+            Assert.AreEqual(1, count);
         }
     }
 }
